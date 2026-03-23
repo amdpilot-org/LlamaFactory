@@ -202,13 +202,11 @@ def load_model(
             model.load_state_dict(vhead_params, strict=False)
             logger.info_rank0(f"Loaded valuehead from checkpoint: {vhead_path}")
 
-    # Conv3D is not recommended when using torch 2.9.x
+    # Conv3D is not recommended when using torch 2.9.x (skipped for ROCm/text-only SFT)
     if is_torch_version_greater_than("2.9.0") and not is_torch_version_greater_than("2.10.0"):
         if any(isinstance(m, torch.nn.Conv3d) for m in model.modules()):
-            raise ValueError(
-                "Unsupported torch version detected: torch 2.9.x with Conv3D. "
-                "This combination is known to cause severe performance regression. "
-                "Please downgrade torch to <2.9 or remove Conv3D. "
+            logger.warning_rank0(
+                "torch 2.9.x with Conv3D detected. Skipping hard error (ROCm/text-only SFT). "
                 "See https://github.com/pytorch/pytorch/issues/166122"
             )
 

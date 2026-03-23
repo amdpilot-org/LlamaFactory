@@ -105,7 +105,14 @@ class FunctionFormatter(StringFormatter):
                 if not isinstance(tool_calls, list):  # parallel function call
                     tool_calls = [tool_calls]
 
-                return [FunctionCall(tc["name"], json.dumps(tc["arguments"], ensure_ascii=False)) for tc in tool_calls]
+                results = []
+                for tc in tool_calls:
+                    args = tc["arguments"]
+                    if isinstance(args, str):
+                        results.append(FunctionCall(tc["name"], args))
+                    else:
+                        results.append(FunctionCall(tc["name"], json.dumps(args, ensure_ascii=False)))
+                return results
             except json.JSONDecodeError:
                 raise RuntimeError(f"Invalid JSON format in function message: {str([content])}.")
 

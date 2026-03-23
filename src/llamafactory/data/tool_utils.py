@@ -646,7 +646,13 @@ class Qwen35ToolUtils(ToolUtils):
     def function_formatter(functions: list["FunctionCall"]) -> str:
         function_texts = []
         for func in functions:
-            name, arguments = func.name, json.loads(func.arguments)
+            name = func.name
+            try:
+                arguments = json.loads(func.arguments) if func.arguments else {}
+            except (json.JSONDecodeError, TypeError):
+                arguments = {}
+            if not isinstance(arguments, dict):
+                arguments = {}
             prompt = f"<tool_call>\n<function={name}>"
             for key, value in arguments.items():
                 prompt += f"\n<parameter={key}>"
