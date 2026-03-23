@@ -745,5 +745,125 @@
       "prompt": "content"
     },
     "folder": "python"
+  },
+  "amdpilot_full": {
+    "file_name": "amdpilot_full_train.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_full_eval": {
+    "file_name": "amdpilot_full_eval.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_chunks": {
+    "file_name": "amdpilot_chunks_train.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_chunks_eval": {
+    "file_name": "amdpilot_chunks_eval.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_combined": {
+    "file_name": "amdpilot_combined_train.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_combined_eval": {
+    "file_name": "amdpilot_combined_eval.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_v4": {
+    "file_name": "amdpilot_v4_train.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
+  },
+  "amdpilot_v4_eval": {
+    "file_name": "amdpilot_v4_eval.jsonl",
+    "formatting": "openai",
+    "columns": {
+      "messages": "messages"
+    },
+    "tags": {
+      "role_tag": "role",
+      "content_tag": "content",
+      "user_tag": "user",
+      "assistant_tag": "assistant",
+      "system_tag": "system",
+      "observation_tag": "tool"
+    }
   }
 }

@@ -1,0 +1,12 @@
+FROM rocm/sgl-dev:v0.5.9-rocm720-mi35x-20260315
+
+WORKDIR /workspace/LlamaFactory
+COPY . /workspace/LlamaFactory/
+
+RUN sed -i 's/requires-python = ">=3.11.0"/requires-python = ">=3.10.0"/' pyproject.toml && \
+    pip install -e ".[metrics]" && \
+    pip install deepspeed wandb && \
+    git checkout pyproject.toml 2>/dev/null || true
+
+ENV HF_HOME=/workspace/hf_cache
+ENV WANDB_DIR=/workspace/output
