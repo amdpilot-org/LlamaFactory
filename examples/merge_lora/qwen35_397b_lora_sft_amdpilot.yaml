@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: /mnt/dcgpuval/huggingface/hub/models--Qwen--Qwen3.5-397B-A17B/snapshots/7cad2bae11cb49ca79f7d6a0954de2e2756f4e27
+adapter_name_or_path: /home/jinpan12/LlamaFactory/saves/qwen35-397b-lora-sft-amdpilot
+template: qwen3_5_nothink
+trust_remote_code: true
+
+### export
+export_dir: /mnt/dcgpuval/huggingface/hub/Qwen3.5-397B-A17B-LoRA-SFT-v4-merged
+export_size: 5
+export_device: cpu
+export_legacy_format: false
