@@ -12,6 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import enum
+import sys
+
+if sys.version_info < (3, 11):
+    try:
+        from strenum import StrEnum
+    except ImportError:
+        pass
+    else:
+        enum.StrEnum = StrEnum
+
 r"""Efficient fine-tuning of large language models.
 
 Level:
