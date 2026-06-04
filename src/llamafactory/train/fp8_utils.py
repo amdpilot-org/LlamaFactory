@@ -62,10 +62,14 @@ def create_fp8_kwargs(training_args: "TrainingArguments") -> list[Any]:
             config = Float8LinearConfig.from_recipe_name("rowwise")
 
             # Enable alignment for better kernel performance
-            if hasattr(config, "enable_amax_init"):
-                config.enable_amax_init = True
-            if hasattr(config, "enable_pre_and_post_forward"):
-                config.enable_pre_and_post_forward = True
+            # TorchAO Float8LinearConfig may be frozen; only set if mutable
+            try:
+                if hasattr(config, "enable_amax_init"):
+                    config.enable_amax_init = True
+                if hasattr(config, "enable_pre_and_post_forward"):
+                    config.enable_pre_and_post_forward = True
+            except (TypeError, AttributeError):
+                pass  # frozen dataclass, defaults already True for rowwise recipe
 
         # Create module filter function to skip problematic layers
         # TorchAO FP8 requires dimensions divisible by 16 for optimal kernels
@@ -188,7 +192,13 @@ def patch_accelerator_for_fp8() -> None:
     This is needed because HuggingFace Trainer doesn't pass kwargs_handlers to Accelerator.
     We monkey-patch Accelerator.__init__ to inject the FP8 recipe and force mixed_precision='fp8'.
     """
-    import transformer_engine.pytorch as te
+    try:
+        import transformer_engine.pytorch as te
+    except ImportError as exc:
+        raise RuntimeError(
+            "transformer_engine is required for fp8_backend='te' but is not installed. "
+            "On AMD/ROCm systems, use fp8_backend='torchao' or 'auto' instead."
+        ) from exc
     from accelerate import Accelerator
 
     # Guard against multiple patches
