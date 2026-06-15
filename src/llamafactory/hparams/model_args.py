@@ -280,9 +280,9 @@ class QuantizationArguments:
         default=QuantizationMethod.BNB,
         metadata={"help": "Quantization method to use for on-the-fly quantization."},
     )
-    quantization_bit: int | None = field(
+    quantization_bit: int | str | None = field(
         default=None,
-        metadata={"help": "The number of bits to quantize the model using on-the-fly quantization."},
+        metadata={"help": "The number of bits to quantize the model using on-the-fly quantization. Use 'fp8' for FP8 LoRA on MI300X."},
     )
     quantization_type: Literal["fp4", "nf4"] = field(
         default="nf4",
