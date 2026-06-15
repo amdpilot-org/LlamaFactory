@@ -477,6 +477,13 @@ def patch_model(
             patch_youtu_vl_model(model)
 
         prepare_model_for_training(model, model_args)
+
+        # FP8 LoRA MI300X preparation when quantization_bit='fp8' is requested
+        if model_args.quantization_bit == "fp8":
+            from ..extras.fp8_lora_mi300x import prepare_model_for_fp8_lora
+
+            prepare_model_for_fp8_lora(model, lora_config=None)
+
         autocast_projector_dtype(model, model_args)
         add_z3_leaf_module(model)
 

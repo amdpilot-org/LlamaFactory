@@ -164,6 +164,12 @@ def configure_quantization(
         logger.info_rank0(f"Quantizing model to {model_args.export_quantization_bit} bit with GPTQModel.")
 
     elif model_args.quantization_bit is not None:  # on-the-fly
+        if model_args.quantization_bit == "fp8":
+            logger.info_rank0("FP8 on-the-fly quantization (MI300X) requested via quantization_bit='fp8'.")
+            # FP8 LoRA does not use bitsandbytes/HQQ/EETQ config; the helper
+            # wraps nn.Linear layers after model loading.
+            return
+
         if model_args.quantization_method == QuantizationMethod.BNB:
             if model_args.quantization_bit == 8:
                 check_version("bitsandbytes>=0.37.0", mandatory=True)
