@@ -601,3 +601,4 @@ class ModelArguments(
         args = asdict(self)
         args = {k: f"<{k.upper()}>" if k.endswith("token") else v for k, v in args.items()}
         return args
+# fp8 quantization_method MI300X LoRA wiring (aiter)
